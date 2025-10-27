@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ntokozo Mhlongo • PLN</title>
+  <meta name="description" content="A professional website curating my PLN across platforms: About.me, X, YouTube, Scoop.it, SlideShare, Edutopia, and Microsoft Educator." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+  :root{
+      --bg:#0b1220;          /* deep navy */
+      --panel:#0f172a;       /* slate-900 */
+      --panel-2:#121a2f;     /* slightly brighter */
+      --card:#0e1a33;
+      --text:#e6eefc;        /* off-white */
+      --muted:#97a4c0;       /* slate-300 */
+      --brand:#4f46e5;       /* indigo-600 */
+      --brand-2:#22d3ee;     /* cyan-400 */
+      --accent:#14b8a6;      /* teal-500 */
+      --ring: rgba(79,70,229,.35);
+      --shadow: 0 10px 30px rgba(10, 16, 35, .6);
+      --radius: 18px;
+    }
+	 *{box-sizing:border-box}
+    html,body{margin:0; padding:0; background:linear-gradient(180deg,var(--bg),#0c1530 60%, #0a1738); color:var(--text); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; scroll-behavior:smooth}
+    a{color:var(--brand-2); text-decoration:none}
+    a:hover{opacity:.9; text-decoration:underline}
+	
+	 /* HERO */
+    .hero{max-width:1200px; margin:40px auto 20px; padding:0 20px}
+    .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:26px}
+    .hero-card{background:radial-gradient(1200px 600px at -10% -20%, rgba(79,70,229,.35), transparent 40%), linear-gradient(180deg, var(--panel), var(--panel-2)); border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); box-shadow:var(--shadow); padding:28px}
+    .hero h1{font-size:40px; line-height:1.1; margin:0 0 12px}
+    .hero p{color:var(--muted); font-size:16px; margin:0 0 18px}
+    .chips{display:flex; flex-wrap:wrap; gap:10px}
+    .chip{font-size:12px; padding:8px 10px; border:1px dashed rgba(255,255,255,.12); border-radius:999px}
+	
+	 /* SECTIONS */
+    section{max-width:1200px; margin:34px auto; padding:0 20px}
+    .section-card{background:linear-gradient(180deg, var(--panel), var(--panel-2)); border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px}
+    .section-header{display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:14px}
+    h2{margin:0; font-size:26px}
+    .sub{color:var(--muted); font-size:14px}
+
+    .grid{display:grid; gap:18px}
+    .grid.two{grid-template-columns: repeat(2, minmax(0, 1fr))}
+    .grid.three{grid-template-columns: repeat(3, minmax(0, 1fr))}
+    @media (max-width:900px){ .hero-grid{grid-template-columns:1fr} .grid.two,.grid.three{grid-template-columns:1fr} }
+
+    /* CARDS & CTAs */
+    .card{background:linear-gradient(180deg, #0f1a33, #0c1831); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:16px; position:relative}
+    .card h3{margin:0 0 6px}
+    .card p{color:var(--muted); font-size:14px}
+    .cta{display:inline-block; margin-top:10px; padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04)}
+    .cta:hover{background:rgba(255,255,255,.08)}
+
+    /* Placeholders for user-supplied images/logos */
+    .logo-slot{width:110px; height:110px; border-radius:14px; background:linear-gradient(135deg, #0f1a33, #0b1530); border:1px dashed rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--muted)}
+
+    /* Responsive embed wrappers */
+    .embed{position:relative; width:100%; aspect-ratio:16/9; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,.1); box-shadow:var(--shadow)}
+    .embed iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
+
+    /* Scoop.it framed style */
+    .scoop-frame{border-radius:16px; border:1px solid rgba(79,70,229,.35); box-shadow:0 0 0 8px rgba(79,70,229,.08), 0 12px 28px rgba(0,0,0,.45); padding:14px; background:linear-gradient(180deg,#0f1630,#0b1330)}
+    .scoop-grid{display:grid; gap:16px; grid-template-columns:repeat(2, minmax(0,1fr))}
+    @media (max-width:900px){ .scoop-grid{grid-template-columns:1fr} }
+
+    /* Footer */
+    footer{max-width:1200px; margin:40px auto 80px; padding:0 20px; color:var(--muted); font-size:13px}
+    .separator{height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent); margin:26px 0}
+    .to-top{position:fixed; right:18px; bottom:18px; padding:12px 14px; border-radius:999px; background:var(--brand); color:white; border:0; box-shadow:0 12px 20px rgba(79,70,229,.35); cursor:pointer}
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f8fc;
+      color: #1a1a1a;
+    }
+
+    /* NAVIGATION */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #004aad;
+      color: white;
+      z-index: 999;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      height: 60px;
+      gap: 1.5rem;
+    }
+
+    nav li {
+      display: inline;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffdd00;
+    }
+
+    /* HEADER */
+    header {
+      padding: 120px 20px 60px;
+      text-align: center;
+      background: linear-gradient(90deg, #004aad, #007bff);
+      color: white;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: auto;
+      opacity: 0.9;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 60px 5%;
+      max-width: 1300px;
+      margin: auto;
+    }
+
+    section h2 {
+      font-size: 1.8rem;
+      color: #004aad;
+      margin-bottom: 30px;
+      border-bottom: 3px solid #007bff;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .card img.logo {
+      width: 48px;
+      height: 48px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+
+    .card h3 {
+      display: inline-block;
+      vertical-align: middle;
+      color: #1a1a1a;
+      margin: 0;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      margin: 10px 0 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #007bff;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #005fcc;
+    }
+
+    iframe, .embed-responsive {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #002b66;
+      color: white;
+      padding: 20px;
+      font-size: 0.9rem;
+      margin-top: 60px;
+    }
+
+    /* Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAVIGATION -->
+  <nav>
+    <ul>
+      <li><a href="#map">PLN Map</a></li>
+      <li><a href="#profiles">Profiles</a></li>
+      <li><a href="#content">Content Tools</a></li>
+      <li><a href="#curation">Curation</a></li>
+      <li><a href="#collaboration">Collaboration</a></li>
+      <li><a href="#storage">Cloud</a></li>
+      <li><a href="#media">Podcast</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Ntokozo Mhlongo – Professional Learning Network</h1>
+    <p>Welcome to my interactive PLN. This PLN is a representation of my professional space. Navigate through this PLN to see an overview of my network. Enjoy!</p>
+    <audio autoplay>
+      <source src="ai-voice-intro.mp3" type="audio/mpeg">
+    </audio>
+  </header>
+
+  <!-- INTERACTIVE PLN MAP -->
+  <section id="map" class="fade-in">
+    <h2>Interactive PLN Map</h2>
+    <iframe src="https://app.lumi.education/api/v1/run/Dl9oKM/embed" height="720" frameborder="0" allowfullscreen></iframe>
+    <script src="https://app.lumi.education/api/v1/h5p/core/js/h5p-resizer.js"></script>
+  </section>
+
+  <!-- PROFESSIONAL PROFILES -->
+  <section id="profiles" class="fade-in">
+    <h2>Professional Profiles</h2>
+    <div class="card-grid">
+
+      <!-- LinkedIn -->
+      <div class="card">
+        <img src="linkedin-logo.png" class="logo" alt="LinkedIn Logo">
+        <h3>LinkedIn</h3>
+        <p>LinkedIn is my professional hub where I engage with educators, share research insights, and develop my professional identity.</p>
+        <a href="https://www.linkedin.com/in/ntokozo-mhlongo-00ba6a377/" target="_blank" class="btn">View Profile</a>
+        <script src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+        <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="large" data-theme="dark" data-type="VERTICAL" data-vanity="ntokozo-mhlongo-00ba6a377" data-version="v1"></div>
+        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7385933602846310400?collapsed=1" height="500"></iframe>
+      </div>
+
+      <!-- Twitter -->
+      <div class="card">
+        <img src="twitter-logo.png" class="logo" alt="Twitter Logo">
+        <h3>X (Twitter)</h3>
+        <p>On X, I share insights, engage in professional discussions, and reflect on educational innovation and practice.</p>
+        <a href="https://x.com/NtokozoGMhlongo" class="btn" target="_blank">Visit Profile</a>
+        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">To all student teachers starting their practicals: You’re not just stepping into a classroom, you’re stepping into purpose.<br>Teach with heart, learn with humility, and remember: every great teacher was once in your shoes.<br>You&#39;ve got this! 💛🍎⁰<a href="https://twitter.com/hashtag/StudentTeachers?src=hash&amp;ref_src=twsrc%5Etfw">#StudentTeachers</a> <a href="https://twitter.com/hashtag/TeachingPracticum?src=hash&amp;ref_src=twsrc%5Etfw">#TeachingPracticum</a></p>&mdash; Ntokozo Mhlongo (@NtokozoGMhlongo) <a href="https://twitter.com/NtokozoGMhlongo/status/1961953342336204997?ref_src=twsrc%5Etfw">August 31, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+       <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Great question. I Would use robotics to foster CAPS skills such as collaboration, computational thinking, and digital fluency. What about you? <a href="https://t.co/Yu1yUftDkp">https://t.co/Yu1yUftDkp</a></p>&mdash; Ntokozo Mhlongo (@NtokozoGMhlongo) <a href="https://twitter.com/NtokozoGMhlongo/status/1961931349968703842?ref_src=twsrc%5Etfw">August 30, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+     
+      </div>
+
+      <!-- About Me -->
+      <div class="card">
+        <img src="aboutme-logo.png" class="logo" alt="About Me">
+        <h3>About.me</h3>
+        <p>My professional landing page that provides a snapshot of who I am as an educator and connects to all my PLN platforms.</p>
+        <a href="https://about.me/ntokozomhlongo" class="btn" target="_blank">View Profile</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT CREATION -->
+  <section id="content" class="fade-in">
+    <h2>Content Creation Tools</h2>
+    <div class="card-grid">
+
+      <div class="card">
+        <img src="canva-logo.png" class="logo" alt="Canva Logo">
+        <h3>Canva</h3>
+        <p>Used for creating educational presentations and visuals to support digital learning.</p>
+        <div class="embed-responsive">
+          <iframe src="https://www.canva.com/design/DAGnksIipX4/vbasHJmKO3_e4AVXk8ubdw/view?embed" height="400"></iframe>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="youtube-logo.png" class="logo" alt="YouTube Logo">
+        <h3>YouTube</h3>
+        <p>My YouTube channel contains lessons and digital learning reflections.</p>
+        <a href="https://www.youtube.com/@ntokozomhlongo" target="_blank" class="btn">Visit Channel</a>
+        <iframe src="https://www.youtube.com/embed/_CjHgCCmk3E" height="300" allowfullscreen></iframe>
+      </div>
+
+      <div class="card">
+        <img src="heyzine-logo.png" class="logo" alt="Heyzine Logo">
+        <h3>Heyzine</h3>
+        <p>Tool used to create an interactive digital e-book for my learners.</p>
+        <iframe src="https://heyzine.com/flip-book/604c49997c.html" height="300"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURATION -->
+  <section id="curation" class="fade-in">
+    <h2>Curation Tools</h2>
+    <div class="card-grid">
+      <div class="card">
+        <img src="scoopit-logo.png" class="logo" alt="Scoop.it Logo">
+        <h3>Scoop.it</h3>
+        <p>I use Scoop.it to curate articles and educational insights on digital literacy and teaching innovation.</p>
+        <a href="https://www.scoop.it/u/ntokozo-mhlongo" class="btn" target="_blank">View Profile</a>
+        <div id='scoopit-container-4143895035'></div>
+        <script src='https://www.scoop.it/embed-scoop/4143895035.js?maxwidth=457'></script>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLABORATION -->
+  <section id="collaboration" class="fade-in">
+    <h2>Communication & Collaboration</h2>
+    <div class="card-grid">
+
+      <div class="card">
+        <img src="kahoot-logo.png" class="logo" alt="Kahoot">
+        <h3>Kahoot</h3>
+        <p>Kahoot helps me create engaging quizzes for formative assessment and classroom fun.</p>
+        <a href="https://create.kahoot.it/profiles/2ec74bd7-838c-41f2-9668-e34d9f9d590f" class="btn" target="_blank">Profile</a>
+        <a href="https://create.kahoot.it/share/grade-10-life-sciences-human-circulatory-system-quiz/55bb9e01-0008-4e42-96ec-a67eb53a645d" class="btn" target="_blank">View Quiz</a>
+      </div>
+
+      <div class="card">
+        <img src="teams-logo.png" class="logo" alt="Teams">
+        <h3>Microsoft Teams</h3>
+        <p>Used for collaboration, meetings, and sharing resources with peers.</p>
+        <img src="teams-screenshot.jpg" alt="Teams Screenshot Placeholder" style="width:100%;border-radius:10px;">
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOUD STORAGE -->
+  <section id="storage" class="fade-in">
+    <h2>Cloud Storage & Productivity</h2>
+    <div class="card-grid">
+      <div class="card">
+        <img src="google-drive-logo.png" class="logo" alt="Google Drive">
+        <h3>Google Drive</h3>
+        <p>My central hub for storing, organizing, and sharing teaching documents and resources.</p>
+        <img src="drive-screenshot.jpg" alt="Drive Screenshot Placeholder" style="width:100%;border-radius:10px;">
+      </div>
+
+      <div class="card">
+        <img src="icloud-logo.png" class="logo" alt="iCloud">
+        <h3>iCloud</h3>
+        <p>Used for backup and cross-device synchronization of professional materials.</p>
+        <img src="icloud-screenshot.jpg" alt="iCloud Screenshot Placeholder" style="width:100%;border-radius:10px;">
+      </div>
+    </div>
+  </section>
+
+  <!-- PODCAST -->
+  <section id="media" class="fade-in">
+    <h2>Educational Podcast</h2>
+    <div class="card-grid">
+      <div class="card">
+        <p>I regularly listen to podcasts to stay current on educational technology and professional development topics.</p>
+        <iframe src="https://open.spotify.com/embed/show/2HGcJRYrjGnpce6bRp8UXm" height="352" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Ntokozo Mhlongo | Professional Learning Network
+  </footer>
+
+  <!-- Fade-In Animation JS -->
+  <script>
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    });
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
