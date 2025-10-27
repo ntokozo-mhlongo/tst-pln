@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ntokozo Mhlongo-PLN</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f4f8ff;
+      --nav:#003f99;
+      --nav-accent:#007bff;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --radius:14px;
+      --maxw:1300px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:var(--bg);
+      color:#0f172a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* NAV (fixed top) */
+    nav{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      height:64px;
+      background:linear-gradient(90deg,var(--nav),var(--nav-accent));
+      display:flex;
+      align-items:center;
+      z-index:9999;
+      box-shadow:0 6px 18px rgba(0,0,0,0.12);
+    }
+    .nav-inner{
+      width:100%;
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding:0 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:white;
+      text-decoration:none;
+    }
+    .brand img{ width:42px; height:42px; border-radius:8px; object-fit:cover; }
+    .brand h1{ font-size:1rem; margin:0; font-weight:700; letter-spacing:0.2px; }
+    .nav-links{ display:flex; gap:14px; align-items:center; }
+    .nav-links a{
+      color:white; text-decoration:none; font-weight:600; padding:8px 10px; border-radius:8px;
+    }
+    .nav-links a:hover{ background:rgba(255,255,255,0.06); color:#ffea00; }
+
+    /* page header */
+    header{
+      padding:110px 20px 36px;
+      text-align:center;
+      background:linear-gradient(180deg,rgba(0, 63, 153,0.08),transparent 60%);
+    }
+    header .title{
+      max-width:var(--maxw);
+      margin:0 auto;
+      color:var(--nav);
+    }
+    header h2{ margin:0; font-size:2.2rem; color:var(--nav); }
+    header p{ margin-top:12px; color:var(--muted); max-width:920px; margin-left:auto; margin-right:auto; }
+
+    /* layout */
+    main{ max-width:var(--maxw); margin:28px auto 80px; padding:0 20px; }
+    section{ margin-bottom:44px; }
+    section h3{
+      display:inline-block; color:var(--nav);
+      font-size:1.35rem; margin-bottom:18px; border-bottom:3px solid var(--nav-accent); padding-bottom:6px;
+    }
+
+    /* card grid */
+    .card-grid{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:22px;
+    }
+
+    /* larger desktop */
+    @media(min-width:1200px){
+      .card-grid{ grid-template-columns:repeat(3, 1fr); }
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:0 6px 20px rgba(13,38,76,0.06);
+      transition:transform .22s ease, box-shadow .22s ease;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-height:160px;
+    }
+    .card:hover{ transform:translateY(-8px); box-shadow:0 14px 40px rgba(7,29,73,0.12); }
+
+    .card-head{ display:flex; gap:12px; align-items:center; }
+    .logo{ width:46px; height:46px; border-radius:10px; object-fit:contain; background:#f2f6ff; padding:6px; }
+    .card-head h4{ margin:0; font-size:1.05rem; color:#06203a; }
+    .card-head p.role{ margin:0; font-size:0.85rem; color:var(--muted); }
+
+    .card-body{ margin-top:12px; flex:1; display:flex; flex-direction:column; gap:10px; }
+    .desc{ font-size:0.95rem; color:#1f2a44; }
+    .meta{ font-size:0.85rem; color:var(--muted); }
+
+    .btn-row{ margin-top:auto; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .btn{
+      text-decoration:none; padding:8px 12px; border-radius:10px; font-weight:600;
+      background:var(--nav); color:white; font-size:0.9rem;
+      transition:transform .15s ease, background .15s;
+    }
+    .btn.ghost{ background:transparent; border:1px solid rgba(0,0,0,0.06); color:var(--nav); }
+    .btn:hover{ transform:translateY(-2px); }
+
+    /* responsive embeds */
+    .embed-wrap{ position:relative; width:100%; padding-top:56.25%; border-radius:10px; overflow:hidden; margin-top:10px; background:#fafbff; }
+    .embed-wrap iframe, .embed-wrap blockquote, .embed-wrap .embed-inner{ position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+
+    /* single-column for smaller screens */
+    @media(max-width:860px){
+      .card-grid{ grid-template-columns:1fr; }
+      nav .nav-inner{ padding:0 12px; }
+    }
+
+    /* footer */
+    footer{ text-align:center; color:#0b2447; padding:28px 20px; border-top:1px solid rgba(0,0,0,0.04); }
+
+    /* reveal */
+    .fade-in{ opacity:0; transform:translateY(16px); transition:all .7s cubic-bezier(.2,.9,.2,1); }
+    .fade-in.visible{ opacity:1; transform:none; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="#map">
+        <img src="giggles.jpg" alt="Ntokozo logo">
+        <div>
+          <h1>Ntokozo Mhlongo</h1>
+          <div style="font-size:12px; opacity:0.9;">Professional Learning Network</div>
+        </div>
+      </a>
+
+      <div class="nav-links" role="navigation" aria-label="Primary">
+        <a href="#map">PLN Map</a>
+        <a href="#profiles">Profiles</a>
+        <a href="#content">Content</a>
+        <a href="#curation">Curation</a>
+        <a href="#collab">Collaboration</a>
+        <a href="#cloud">Cloud & Docs</a>
+        <a href="#media">Professional</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header>
+    <div class="title">
+      
+
+	 <h2> Professional Learning Network</h2>
+      <p> Welcome! I'm Ntokozo Mhlongo. This Interactive PLN showcases my digital identity, tools, creations, and collaborations. 
+	  A PLN is a purposeful web of people, communities, tools, and resources we learn with and from. 
+	  As a Pre-service educator, a strong PLN accelerates my skill growth, exposes me to new pedagogies, and keeps me current with rapid technological change.
+	  Each embed / post shown here is from my profile or my authored content.</p>
+	  </div>
+	  <div >
+          <span >Collaboration/</span>
+          <span >Knowledge Sharing/</span>
+          <span >EdTech Innovation/</span>
+          
+          <span >Lifelong Learning</span>
+        </div>
+    
+
+    <!-- AI voice welcome using Web Speech API (works even when autoplay blocked) -->
+    <script>
+      // speak welcome message on page load (user agents may require interaction to allow sound;
+      // this will silently fail if blocked but won't break the page)
+      window.addEventListener('load', () => {
+        const msg = "Welcome to my interactive PLN. This PLN is a representation of my professional space. Navigate through this PLN to see an overview of my network. Enjoy";
+        if ('speechSynthesis' in window) {
+          const utter = new SpeechSynthesisUtterance(msg);
+          utter.rate = 0.95;
+          utter.pitch = 1.0;
+          // will try to speak; if blocked it's fine
+          try { window.speechSynthesis.speak(utter); } catch(e){ /* ignore */ }
+        } else {
+          // fallback: include audio element if you have an mp3
+          // <audio src="ai-voice-intro.mp3" autoplay></audio>
+        }
+      });
+    </script>
+  </header>
+
+  <main>
+    <!-- MAP -->
+   <!-- Interactive Map -->
+<section id="map">
+  <h2>Brief Overview of the PLN</h2>
+ 
+  <div class="card">
+    <iframe src="https://app.lumi.education/api/v1/run/Dl9oKM/embed" width="1088" height="720" allowfullscreen></iframe>
+    <script src="https://app.Lumi.education/api/v1/h5p/core/js/h5p-resizer.js"></script>
+  </div>
+</section>
+
+    <!-- PROFILES -->
+    <section id="profiles" class="fade-in">
+      <h3>Professional Profiles</h3>
+      <div class="card-grid">
+
+        <!-- LinkedIn -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="linkedin.png" alt="LinkedIn">
+            <div>
+              <h4>LinkedIn</h4>
+              <p class="role meta">Professional Networking</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc">A professional networking platform where people connect for career opportunities, share work-related content, and build their professional profiles. It’s often used for job searching and recruiting.
+			LinkedIn is my central professional profile. I post all my academic achievements, insights and connect with other professionals. See a few posts from my profile.</div>
+
+            <div class="btn-row">
+              <a class="btn" href="https://www.linkedin.com/in/ntokozo-mhlongo-00ba6a377/" target="_blank" rel="noopener">View LinkedIn Profile</a>
+            </div>
+
+            <!-- LinkedIn badge (profile) -->
+            <div style="margin-top:12px;">
+              <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+              <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="large" data-theme="dark" data-type="VERTICAL" data-vanity="ntokozo-mhlongo-00ba6a377" data-version="v1"></div>
+            </div>
+
+            
+          </div>
+        </div>
+
+        <!-- About.me -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="about.me.png" alt="About.me">
+            <div>
+              <h4>About.me</h4>
+              <p class="role meta">Professional landing page</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc">A short personal or professional summary (often found on websites, resumes, or social media profiles) that describes who you are, what you do, and what your interests or goals are.
+			My About.me gives a quick snapshot of my professional and personal identity.</div>
+            <div class="btn-row">
+              <a class="btn" href="https://about.me/ntokozomhlongo" target="_blank" rel="noopener">View About.me</a>
+		
+            </div>
+			<div class="btn-row">
+			<img src="abt.png" height="450" width="400"/>
+			</div>
+          </div>
+        </div>
+
+        <!-- Twitter / X (embedded tweets) -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="x-logo.png" alt="X / Twitter">
+            <div>
+              <h4>X (formerly Twitter)</h4>
+              <p class="role meta">Personal/Professional Social Media Platform</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc">A social media platform (formerly known as Twitter) where users post short messages called “tweets.” It’s used for sharing news, opinions, and updates in real time.
+			I post reflections, motivations and ICT-Related content on this profile: the embedded tweets below are from my account.</div>
+
+            <!-- Embedded tweets (as provided) -->
+            <div style="margin-top:8px;">
+              
+              <blockquote class="twitter-tweet"><p lang="en" dir="ltr">To all student teachers starting their practicals: You’re not just stepping into a classroom, you’re stepping into purpose.<br>Teach with heart, learn with humility, and remember: every great teacher was once in your shoes.<br>You've got this! 💛🍎 <a href="https://twitter.com/hashtag/StudentTeachers?src=hash">#StudentTeachers</a> <a href="https://twitter.com/hashtag/TeachingPracticum?src=hash">#TeachingPracticum</a></p>&mdash; Ntokozo Mhlongo (@NtokozoGMhlongo) <a href="https://twitter.com/NtokozoGMhlongo/status/1961953342336204997?ref_src=twsrc%5Etfw">August 31, 2025</a></blockquote>
+              <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+
+            <div class="meta">Tweets above are authored by: <a href="https://x.com/NtokozoGMhlongo" target="_blank" rel="noopener">@NtokozoGMhlongo</a>.</div>
+          </div>
+        </div>
+
+      </div> <!-- end card-grid -->
+    </section>
+
+    <!-- CONTENT CREATION -->
+    <section id="content" class="fade-in">
+      <h3>Content Creation Tools</h3>
+      <div class="card-grid">
+
+        <!-- Canva -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="images.jpeg" alt="Canva">
+            <div>
+              <h4>Canva</h4>
+              <p class="role meta">Designing presentations & visuals</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc">An online graphic design tool used to create visuals like posters, presentations, social media posts, and videos using customizable templates.
+			I design lesson slides and resources in Canva. The embed below displays a sample presentation authored by me.</div>
+
+            <div class="embed-wrap" style="padding-top:62%;">
+              <iframe src="https://www.canva.com/design/DAGnksIipX4/vbasHJmKO3_e4AVXk8ubdw/view?embed" title="Canva - Presentation by Ntokozo"></iframe>
+            </div>
+
+            <div class="btn-row">
+              <a class="btn" href="https://www.canva.com/design/DAGnksIipX4/vbasHJmKO3_e4AVXk8ubdw/view?utm_content=DAGnksIipX4&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank">Open in Canva</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Heyzine (e-book) -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="heyzine.jpeg" alt="Heyzine">
+            <div>
+              <h4>Heyzine</h4>
+              <p class="role meta">Interactive flipbook Maker</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc">A digital flipbook maker that converts PDFs into interactive, page-turning online magazines, brochures, or catalogs.
+			I used Heyzine to draft an e-book for Life Sciences.</div>
+
+            <div class="embed-wrap" style="padding-top:46%;">
+              <iframe src="https://heyzine.com/flip-book/604c49997c.html" title="Heyzine e-book"></iframe>
+            </div>
+
+            <div class="btn-row">
+              <a class="btn" href="https://nicolefrisley.github.io/LIFE-SCIENCE-EBOOK-ICT/" target="_blank">Open e-Book</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- YouTube -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="yt.png" alt="YouTube">
+            <div>
+              <h4>YouTube</h4>
+              <p class="role meta">Video content</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc">A video-sharing platform where users can upload, watch, comment on, and share videos. It’s widely used for entertainment, education, and marketing.
+			I use YouTube for watchind educational content.I've also used the platform to share my video essay on AR and VR in education. The embed below is from my channel.</div>
+
+            <div class="embed-wrap" style="padding-top:56.25%;">
+              <iframe src="https://www.youtube.com/embed/_CjHgCCmk3E" title="YouTube lesson" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+            </div>
+
+            <div class="btn-row">
+              <a class="btn" href="https://www.youtube.com/@NtokiiGMhlongo" target="_blank">Visit Channel</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    
+	
+	<h3> Continued </h3>
+	<div class="card-head">
+            <img class="logo" src="H5P.jpeg" alt="H5P">
+            <div>
+              <h4>Lumi Education (H5P)</h4>
+              <p class="role meta">Interactive Learning Content</p>
+            </div>
+          </div>
+
+  <div class="card">
+            <div class="desc">An online tool for creating interactive learning content, such as quizzes, presentations, and videos that can be embedded in websites or learning management systems (LMS).
+			Below are a few interactive learning content that I have created.</div>
+
+            <div class="embed-wrap" aria-hidden="false">
+              <iframe src="https://app.lumi.education/api/v1/run/FvHZzP/embed" width="50" height="50" frameborder="0" allowfullscreen="allowfullscreen" allow="geolocation *; microphone *; camera *; midi *; encrypted-media *"></iframe><script src="https://app.Lumi.education/api/v1/h5p/core/js/h5p-resizer.js" charset="UTF-8"></script>
+            </div>
+			<div class="embed-wrap" aria-hidden="false">
+			<iframe src="https://app.lumi.education/api/v1/run/hPRq-i/embed" width="50" height="50" frameborder="0" allowfullscreen="allowfullscreen" allow="geolocation *; microphone *; camera *; midi *; encrypted-media *"></iframe><script src="https://app.Lumi.education/api/v1/h5p/core/js/h5p-resizer.js" charset="UTF-8"></script>
+			</div>
+</section>
+
+    <!-- CURATION -->
+    <section id="curation" class="fade-in">
+      <h3>Content Curation and Content Repositories</h3>
+      <div class="card-grid">
+
+        <!-- Scoop.it cards (three provided) -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="scoop.png" alt="Scoop.it">
+            <div>
+              <h4>Scoop.it!</h4>
+              <p class="role meta">Curated articles</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc"> A content curation platform that allows users to collect, organize, and share articles or web content on specific topics.
+			I curate articles and resources on digital literacy, AI in education and classroom safety.</div>
+
+            <div style="display:flex; flex-direction:column; gap:8px;">
+             <div id='scoopit-container-4167458066'><a href='https://www.scoop.it/topic/developing-a-good-digital-footprint/p/4167458066/2025/08/30/8-core-digital-literacy-skills-for-2030'>8 Core Digital Literacy Skills for 2030</a></div><script type='text/javascript' src='https://www.scoop.it/embed-scoop/4167458066.js?maxwidth=457' ></script>
+             
+            </div>
+
+            <div class="btn-row">
+              <a class="btn" href="https://www.scoop.it/u/ntokozo-mhlongo" target="_blank">Open Scoop.it Profile to see more curated articles</a>
+            </div>
+
+            <div class="meta">This embedded article is from my scoopit! Profile.</div>
+          </div>
+        </div>
+
+        <!-- Slideshare -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="slideshare.png" alt="Slideshare">
+            <div>
+              <h4>SlideShare</h4>
+              <p class="role meta">Slide decks & presentations</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc">A platform for sharing professional presentations, infographics, and documents online, often used for educational or business purposes.
+			Below is My SlideShare presentation </div>
+
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <div class="embed-wrap" style="padding-top:80%;">
+                <iframe src="https://www.slideshare.net/slideshow/embed_code/key/tNdaeopOzvMZhT" title="Slideshare 1"></iframe>
+              </div>
+              
+            </div>
+
+            <div class="btn-row">
+              <a class="btn" href="https://www.slideshare.net/gmhlongo153" target="_blank">Open SlideShare to see more presentations</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- GitHub -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="github.png" alt="GitHub">
+            <div>
+              <h4>GitHub:repositories</h4>
+              <p class="role meta">Code</p>
+            </div>
+          </div>
+		  <div>
+		  <div class="btn-row">
+			<img src="code.png" height="300" width="350"/>
+			</div>
+			</div>
+
+          <div class="card-body">
+            <div class="desc">A web-based platform for version control and collaboration, mainly used by developers to store, share, and manage code projects.
+			I use GitHub to store and host my Website Code, such as this PLN. Example repo and co-created e-book site linked below.</div>
+
+            <div class="btn-row">
+              <a class="btn" href="https://github.com/ntokozo-mhlongo" target="_blank">My GitHub Profile</a>
+              <a class="btn ghost" href="https://github.com/ntokozo-mhlongo/ict-pln.git" target="_blank">Repo (ict-pln)</a>
+              <a class="btn ghost" href="https://nicolefrisley.github.io/LIFE-SCIENCE-EBOOK-ICT/" target="_blank">Co-created e-book</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- COLLABORATION -->
+    <section id="collab" class="fade-in">
+      <h3>Collaboration & Assessment Tools</h3>
+      <div class="card-grid">
+
+        <!-- Kahoot -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="kahoot.png" alt="Kahoot">
+            <div>
+              <h4>Kahoot</h4>
+              <p class="role meta">Quizzes</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc">An interactive learning platform that lets users create and play quiz-based games (called “kahoots”), commonly used in classrooms and training sessions for fun, engaging learning.
+			I author Kahoots for formative assessment. Below are links to Kahoot games</div>
+            <div class="btn-row">
+              <a class="btn" href="https://create.kahoot.it/profiles/2ec74bd7-838c-41f2-9668-e34d9f9d590f" target="_blank">Kahoot Profile</a>
+              <a class="btn ghost" href="https://create.kahoot.it/share/grade-10-life-sciences-human-circulatory-system-quiz/55bb9e01-0008-4e42-96ec-a67eb53a645d" target="_blank">Quiz — Circulatory System</a>
+              <a class="btn ghost" href="https://create.kahoot.it/share/3-truths-1-lie/0cbcdce7-6be5-45d1-b664-2b68bd23bbe0" target="_blank">Quiz — 3 Truths 1 Lie</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Google Classroom (screenshots placeholders) -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="google classroom.png" alt="Google Classroom">
+            <div>
+              <h4>Google Classroom</h4>
+              <p class="role meta">Online Learning</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc">An online learning platform by Google that helps teachers create, distribute, and grade assignments, and communicate with students in a virtual classroom setting.
+			Below is a screenshot of a Classroom I participate in called "Surfers" for students interested in ICT/IT professional development.</div>
+            <div style="display:flex; gap:8px; margin-top:8px;">
+              <img src="screenshot1.png" alt="Classroom screenshot 1" width=400" height="250">
+          
+            </div>
+            
+          </div>
+        </div>
+
+        <!-- Microsoft Teams -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="teams.png" alt="MS Teams">
+            <div>
+              <h4>Microsoft Teams</h4>
+              <p class="role meta">Collaboration & meetings</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc">A collaboration and communication platform by Microsoft that supports chat, video meetings, file sharing, and integration with other Microsoft 365 tools often used for remote work and online learning.
+			Below is a screenshot of meetings I have hosted for  online collaboration.</div>
+            <img src="teams2.png" alt="Teams screenshot" width=380" height="250">
+            
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CLOUD & GOOGLE DOCS -->
+    <section id="cloud" class="fade-in">
+      <h3>Google Tools and Storage</h3>
+      <div class="card-grid">
+
+        <!-- Google Drive screenshot -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="google drive.png" alt="Google Drive">
+            <div>
+              <h4>Google Drive</h4>
+              <p class="role meta">Storage of learning artifacts & resources</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc">A cloud storage service by Google that allows users to store, share, and access files (like documents, photos, and videos) online from any device. It also integrates with Google apps such as Docs, Sheets, and Slides for easy collaboration and editing.
+			Below are links of documents I keep in my drive such as Slides, Documents, spreadsheets from Google Services.</div>
+            <img src="drive.png" alt="Google Drive screenshot" "width="300" height="300">
+            <div class="btn-row" style="margin-top:12px;">
+              <a class="btn" href="https://docs.google.com/presentation/d/18i6FWPqTMc0HaPb4OzLTt4qUPd-XC4pSgHRj-2Y96u4/edit?usp=sharing" target="_blank">Google Slides</a>
+              <a class="btn ghost" href="https://docs.google.com/document/d/15xYZD7TE5x_gYBkeIrhFm0LsB4gfUgEK/edit?usp=sharing&ouid=108869034728983161395&rtpof=true&sd=true" target="_blank">Google Doc</a>
+              <a class="btn ghost" href="https://docs.google.com/spreadsheets/d/1jNRlhhBsIHetG4nVrzPgMs14Q3sJl-ok/edit?usp=sharing&ouid=108869034728983161395&rtpof=true&sd=true" target="_blank">Google Sheet</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Google Forms (two) -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="google forms.png" alt="Google Forms">
+            <div>
+              <h4>Google Forms</h4>
+              <p class="role meta">Assessment & feedback forms</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc">I use Google forms for feedback and summative/formative assessment. Below is an assessment I created for Grade 10 Life Science</div>
+
+            <div class="embed-wrap" style="padding-top:140%;">
+              <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSelwbSrW2wWV7lW3Uz5UGHJlr9647F-U1ni70hMI5I9kWywuA/viewform?embedded=true" title="Google Form 1"></iframe>
+            </div>
+
+            
+
+            <div class="meta">Embedded forms are from my Google account.</div>
+          </div>
+        </div>
+
+        <!-- Outlook / iCloud / WhatsApp placeholders -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="whatsapp.png" alt="Outlook">
+            <div>
+              <h4>WhatsApp</h4>
+              <p class="role meta">Communication Storage</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc">While WhatsApp is a communication tool, I also use it to store communication, such as information, links, documents shared by tutors and
+			fellow course students on group chats.</div>
+
+            <div>
+              <img src="whatsapp1.jpg" width="350" height="450">
+			  </div>
+			 
+              
+            </div>
+
+            <div class="meta">Screenshot from my WhatsApp Profile.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MEDIA & MISC -->
+    <section id="media" class="fade-in">
+      <h3>Professional Development</h3>
+      <div class="card-grid">
+
+        <!-- Spotify Podcast -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="spotify.png" alt="Spotify">
+            <div>
+              <h4>Spotify</h4>
+              <p class="role meta">Podcast/Music</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc">A digital music and podcast streaming platform that lets users listen to millions of songs, create playlists, and discover new audio content online or offline.
+			I listen to personal/professional podcasts. The show below resonates with me as a Psychology major student. Embedded show from my saved list.</div>
+
+            <div class="embed-wrap" style="padding-top:56%;">
+              <iframe data-testid="embed-iframe" src="https://open.spotify.com/embed/show/2HGcJRYrjGnpce6bRp8UXm?utm_source=generator" title="Spotify podcast" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+            </div>
+
+            <div class="btn-row">
+              <a class="btn" href="https://open.spotify.com/show/2HGcJRYrjGnpce6bRp8UXm" target="_blank">Open in Spotify</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Brainly -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="microsoft.png" alt="Microsoft">
+            <div>
+              <h4>Microsoft Educator Academy</h4>
+              <p class="role meta">Professional Development Courses</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc">An online community and platform by Microsoft that offers training, resources, and certifications to help teachers integrate technology into their teaching.</div>
+            <div class="btn-row">
+              <a class="btn" href="https://learn.microsoft.com/en-us/users/ntokozomhlongo-3561/achievements" target="_blank">View Achievements</a>
+            </div>
+			<div>
+			<img src="certificate 1.png" width="400" height="400">
+			</div>
+          </div>
+        </div>
+
+        <!-- Grammarly explanation & Edutopia -->
+        <div class="card">
+          <div class="card-head">
+            <img class="logo" src="edu.png" alt="Edutopia">
+            <div>
+              <h4>Edutopia</h4>
+              <p class="role meta">Educational Articles</p>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="desc">An educational website and community founded by the George Lucas Educational Foundation that shares research-based strategies, videos, and articles to improve teaching and learning practices.
+			I read articles from this website for more educational insights</div>
+			
+			<div>
+            <div class="btn-row">
+              <a class="btn ghost" href="https://www.edutopia.org/my-homeroom" target="_blank">Edutopia — My Homeroom</a>
+              
+            </div>
+			<img src="edu2.png">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Extra: Slides / Forms / Scoop / Twitter scripts loaded once -->
+  </main>
+
+  <footer>
+    <div style="max-width:var(--maxw); margin:0 auto; padding:0 20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+        <div>© 2025 <strong>Ntokozo Mhlongo</strong> — Professional Learning Network</div>
+       
+      </div>
+    </div>
+  </footer>
+
+  <!-- Third-party widget scripts (Twitter, Scoop.it) -->
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script type='text/javascript' src='https://www.scoop.it/embed-scoop/4143895035.js?maxwidth=457'></script>
+  <script type='text/javascript' src='https://www.scoop.it/embed-scoop/4167458066.js?maxwidth=457'></script>
+  <script type='text/javascript' src='https://www.scoop.it/embed-scoop/4167449224.js?maxwidth=457'></script>
+
+  <!-- Reveal animation -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const els = document.querySelectorAll('.fade-in');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+      }, {threshold:0.12});
+      els.forEach(el => obs.observe(el));
+    });
+  </script>
+
+  <!-- NOTE: Some embeds (LinkedIn, Twitter, Scoop.it, Lumi, Google forms/Canva) require that this HTML be served over HTTP(s)
+       and that the embedding sites allow cross-origin embedding. If a profile or embed doesn't render in your local file preview,
+       open the file via a local server (for example: Right-click > Open with Live Server in VSCode or use a simple Python http.server) -->
+</body>
+</html>
